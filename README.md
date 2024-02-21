@@ -12,4 +12,15 @@ hostname rtr-hq
 do commit
 do confirm
 ```
-### SW-HQ_BR/ISP/SRV_
+### SW-HQ(user/P@ssw0rd_toor)_BR(user/P@ssw0rd)(root/toor_toor) 
+```
+ISP(root_toor)
+SRV-HQ_BR(user/P@ssw0rd_toor)
+CLI_BR/HQ(user/P@ssw0rd)
+```
+
+```
+su
+vim /etc/hostname
+systemctl reboot
+```
