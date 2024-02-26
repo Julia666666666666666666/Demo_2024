@@ -31,9 +31,22 @@ systemctl reboot
 
 SW-HQ | SRV-HQ | CLI-HQ | CICD-HQ | SW-BR | SRV-BR | CLI-BR
 
-sed -i 's/DISABLED=yes/DISABLED=no/g' /etc/net/ifaces/ens18/options
-sed -i 's/NM_CONTROLLED=yes/NM_CONTROLLED=no/g' /etc/net/ifaces/ens18/options
-echo 10.0.20.2/24 > /etc/net/ifaces/ens18/ipv4address
-echo default via 10.0.20.1 > /etc/net/ifaces/ens18/ipv4route
-systemctl restart network
-ping -c 4 8.8.8.8
+## c)	На SRV-HQ и SRV-BR, создайте пользователя sshuser с паролем P@ssw0rd
+
+a.	Пользователь sshuser должен иметь возможность запуска утилиты sudo без дополнительной аутентификации.
+
+b.	Запретите парольную аутентификацию. Аутентификация пользователя sshuser должна происходить только при помощи ключей
+
+c.	Измените стандартный ssh порт на 2023.
+
+d.	На CLI-HQ сконфигурируйте клиент для автоматического подключения к SRV-HQ и SRV-BR под пользователем sshuser. При подключении автоматически должен выбираться корректный порт. Создайте пользователя sshuser на CLI-HQ для обеспечения такого сетевого доступа.
+
+```
+adduser sshuser
+passwd sshuser
+P@ssw0rd
+P@ssw0rd
+echo "sshuser ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+usermod -aG whell sshuser
+sudo -i
+```
